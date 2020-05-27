@@ -42,7 +42,8 @@ function titleClickHandler(event){
 const optArticleSelector = '.post',
   optTitleSelector = '.post-title',
   optTitleListSelector = '.titles',
-  optArticleTagsSelector = '.post-tags .list';
+  optArticleTagsSelector = '.post-tags .list',
+  optArticleAuthorSelector = '.post-author';
 
 function generateTitleLinks(customSelector = '') {
   /* remove contents of titleList */
@@ -53,7 +54,6 @@ function generateTitleLinks(customSelector = '') {
 
   /* for each article */
   const articles = document.querySelectorAll(optArticleSelector + customSelector);
-  console.log(articles);
 
   for(let article of articles) {
   /* get the article id */
@@ -62,12 +62,10 @@ function generateTitleLinks(customSelector = '') {
     const articleTitle = article.querySelector(optTitleSelector).innerHTML;
     /* get the title from the title element */
     const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
-    console.log(linkHTML);
     /* insert link into titleList */
     titleList.innerHTML = titleList.innerHTML + linkHTML;
   }
   const links = document.querySelectorAll('.titles a');
-  console.log(links);
 
   for(let link of links){
     link.addEventListener('click', titleClickHandler);
@@ -91,16 +89,14 @@ function generateTags(){
   let html = '';
     /* get tags from data-tags attribute */
   const articleTags = article.getAttribute('data-tags');
-  console.log(articleTags);
     /* split tags into array */
-  const articleTagsArray = articleTags.split('_');
+  const articleTagsArray = articleTags.split(' ');
   /* START LOOP: for each tag */
   for(let tag of articleTagsArray){
       /* generate HTML of the link */
       const linkHTML = '<li><a href="#tag-' + tag + '"><span>' + tag + '</span></a></li>';
       /* add generated code to html variable */
         html = html + linkHTML;
-        console.log(linkHTML);
       }
     /* END LOOP: for each tag */
     /* insert HTML of all the links into the tags wrapper */
@@ -121,15 +117,12 @@ function tagClickHandler(event){
   const href = clickedElement.getAttribute('href');
   /* make a new constant "tag" and extract tag from the "href" constant */
   const tag = href.replace('#tag-', '');
-  console.log(tag);
   /* find all tag links with class active */
   const activeLinks = document.querySelectorAll('a[href="' + href + '"]');
-  console.log(activeLinks);
   /* START LOOP: for each active tag link */
   for(let activeLink of activeLinks) {
     /* remove class active */
     activeLink.classList.remove('.active');
-    console.log(activeLink);
   /* END LOOP: for each active tag link */
   }
   /* find all tag links with "href" attribute equal to the "href" constant */
@@ -138,7 +131,6 @@ function tagClickHandler(event){
     for(let taglink of taglinks){
     /* add class active */
       tagLink.classList.add('active');
-       console.log(taglink);
   /* END LOOP: for each found tag link */
     }
   /* execute function "generateTitleLinks" with article selector as argument */
@@ -161,27 +153,31 @@ addClickListenersToTags();
 
 function generateAuthors(){
   /* find all articles */
-
+  const articles = document.querySelectorAll(optArticleSelector);
+  let html = '';
   /* START LOOP: for every article: */
+  for(let article of articles) {
 
     /* find author wrapper */
+    const author = article.querySelector(optArticleAuthorSelector);
+    author.innerHTML = '';
+    console.log(author);
 
     /* make html variable with empty string */
 
-    /* get authors from data-tags attribute */
-
-    /* split authors into array */
-
-    /* START LOOP: for each author */
+    /* get authors from data-author attribute */
+    const authorData = author.getAttribute('data-author');
+    console.log(authorData);
 
       /* generate HTML of the link */
-
+      const authorLink = '<li><a href="#' + authorData + '"><span>' + authorData + '</span></a></li>';
+      console.log(authorLink);
       /* add generated code to html variable */
+      html = html + authorLink;
+      author.innerHTML = html;
 
     /* END LOOP: for each tag */
-
-    /* insert HTML of all the links into the tags wrapper */
-
+  }
   /* END LOOP: for every article: */
 }
 
