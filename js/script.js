@@ -128,7 +128,7 @@ function tagClickHandler(event){
   /* find all tag links with "href" attribute equal to the "href" constant */
   const tagLinks = document.querySelectorAll(href);
   /* START LOOP: for each found tag link */
-    for(let taglink of taglinks){
+    for(let tagLink of tagLinks){
     /* add class active */
       tagLink.classList.add('active');
   /* END LOOP: for each found tag link */
@@ -139,12 +139,13 @@ function tagClickHandler(event){
 
 function addClickListenersToTags(){
   /* find all links to tags */
-
+const activeLinks = document.querySelectorAll('.post-tags .list a');
   /* START LOOP: for each link */
-
+  for (let link of activeLinks) {
     /* add tagClickHandler as event listener for that link */
-
+    link.addEventListener('click', tagClickHandler);
   /* END LOOP: for each link */
+  }
 }
 
 addClickListenersToTags();
@@ -162,7 +163,7 @@ function generateAuthors(){
     const author = article.querySelector(optArticleAuthorSelector);
     author.innerHTML = '';
     console.log(author);
-    
+
     /* make html variable with empty string */
     let html = '';
 
