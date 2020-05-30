@@ -154,7 +154,7 @@ addClickListenersToTags();
 function generateAuthors(){
   /* find all articles */
   const articles = document.querySelectorAll(optArticleSelector);
-  let html = '';
+
   /* START LOOP: for every article: */
   for(let article of articles) {
 
@@ -162,8 +162,9 @@ function generateAuthors(){
     const author = article.querySelector(optArticleAuthorSelector);
     author.innerHTML = '';
     console.log(author);
-
+    
     /* make html variable with empty string */
+    let html = '';
 
     /* get authors from data-author attribute */
     const authorData = author.getAttribute('data-author');
