@@ -122,9 +122,8 @@ function generateTags(){
   /* NEW START LOOP: for each tag in allTags */
     for(let tag in allTags){
     /* NEW generate code of a link and add it to allTagsHTML*/
-    /* '<li><a href="#tag-' + tag + '"><span>' + tag + '</span></a></li>'; */
-      allTagsHTML += tag + ' (' + allTags[tag] + ') ';
 
+      allTagsHTML += tag + ' (' + allTags[tag] + ') ';
     }
   /* NEW END LOOP: for ach tag in allTagsHTML */
 
@@ -221,7 +220,7 @@ function authorClickHandler (event) {
   /* make a new constant "href" and read the attribute "href" of the clicked element */
   const href = clickedElement.getAttribute('href');
   /* make a new constant "author" and extract author from the "href" constant */
-  const author = href.replace('-author', '');
+  const author = href.replace('#data-', '');
   /* find all author links with class active */
   const activeLinks = document.querySelectorAll('a[href="' + href + '"]');
   /* START LOOP: for each active author link */
