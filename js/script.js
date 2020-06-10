@@ -122,8 +122,7 @@ function generateTags(){
   /* NEW START LOOP: for each tag in allTags */
     for(let tag in allTags){
     /* NEW generate code of a link and add it to allTagsHTML*/
-
-      allTagsHTML += tag + ' (' + allTags[tag] + ') ';
+      allTagsHTML += `<li><a href="#tag- ${tag}"><span>${tag} (${allTags[tag]})</span></a></li>`
     }
   /* NEW END LOOP: for ach tag in allTagsHTML */
 
@@ -195,7 +194,7 @@ function generateAuthors(){
     let html = '';
 
     /* get authors from data-author attribute */
-    const authorData = author.getAttribute('data-author');
+    const authorData = article.getAttribute('data-author');
     console.log(authorData);
 
       /* generate HTML of the link */
