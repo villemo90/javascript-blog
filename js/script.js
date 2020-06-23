@@ -44,7 +44,9 @@ const optArticleSelector = '.post',
   optTitleListSelector = '.titles',
   optArticleTagsSelector = '.post-tags .list',
   optArticleAuthorSelector = '.post-author',
-  optTagsListSelector = '.tags .list';
+  optTagsListSelector = '.tags .list',
+  optCloudClassCount = 5,
+  optCloudClassPrefix = 'tag-size-';
 
 function generateTitleLinks(customSelector = '') {
   /* remove contents of titleList */
@@ -76,6 +78,26 @@ function generateTitleLinks(customSelector = '') {
 generateTitleLinks();
 
 // TAGS //
+
+function calculateTagsParams (tags){
+  const params = {max:0, min:999999};
+
+  for(let tag in tags){
+    if(tags[tag] > params.max){
+        params.max = tags[tag];
+    }
+    if(tags[tag] < params.min){
+        params.min = tags[tag];
+    }
+  }
+  return (params);
+}
+
+function calculateTagClass (count , params) {
+  console.log('calculateTagClass function is called')
+  
+}
+
 
 function generateTags(){
   /* [NEW] create a new variable allTags with an empty object */
@@ -118,14 +140,16 @@ function generateTags(){
 
 
   /* [NEW] create variable for all links HTML code */
+  const tagsParams = calculateTagsParams(allTags);
   let allTagsHTML = '';
   /* NEW START LOOP: for each tag in allTags */
     for(let tag in allTags){
     /* NEW generate code of a link and add it to allTagsHTML*/
-      allTagsHTML += `<li><a href="#tag- ${tag}"><span>${tag} (${allTags[tag]})</span></a></li>`
+      const tagLinkHTML = '<li><a href="#tag=' + tag + '" class="' + calculateTagClass(allTags[tag], tagsParams) + '"' + '">' + tag + '</a></li>';
+      //allTagsHTML += `<li><a href="#tag- ${tag}"><span>${tag} (${allTags[tag]})</span></a></li>`
+      allTagsHTML += tagLinkHTML;
     }
   /* NEW END LOOP: for ach tag in allTagsHTML */
-
   /* NEW add html from allTagsHTML to tagList */
   tagList.innerHTML = allTagsHTML;
 }
@@ -188,18 +212,15 @@ function generateAuthors(){
     /* find author wrapper */
     const author = article.querySelector(optArticleAuthorSelector);
     author.innerHTML = '';
-    console.log(author);
 
     /* make html variable with empty string */
     let html = '';
 
     /* get authors from data-author attribute */
     const authorData = article.getAttribute('data-author');
-    console.log(authorData);
 
       /* generate HTML of the link */
       const authorLink = '<li><a href="' + authorData + '"><span>' + authorData + '</span></a></li>';
-      console.log(authorLink);
       /* add generated code to html variable */
       html = html + authorLink;
       author.innerHTML = html;
