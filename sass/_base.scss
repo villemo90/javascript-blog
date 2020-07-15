@@ -43,6 +43,14 @@
   .active {
     font-weight: bold;
   }
+
+  li {
+    display: inline-block;
+    padding-right: 5px;
+    a {
+      text-decoration: none;
+    }
+  }
 }
 
 .list-horizontal {
@@ -78,4 +86,31 @@
   p {
     margin: 0 10px 0 0;
   }
+}
+
+/* Tag cloud */
+
+.tag-size-1 {
+  font-size: 14px;
+  color: #74b9ff;
+}
+
+.tag-size-2 {
+  font-size: 18px;
+  color: #0984e3;
+}
+
+.tag-size-3 {
+  font-size: 22px;
+  color: #a29bfe;
+}
+
+.tag-size-4 {
+  font-size: 25px;
+  color: #6c5ce7;
+}
+
+.tag-size-5 {
+  font-size: 30px;
+  color: #fd79a8;
 }
