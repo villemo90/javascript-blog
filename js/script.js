@@ -232,7 +232,8 @@ function generateAuthors(){
   }
   const authors = document.querySelectorAll(optAuthorsSelector)[0];
   for (let author in allAuthors){
-    authors.innerHTML += '<li>'+ author.replace('by ', '') + ' (' + allAuthors[author]+')</li>'
+    authors.innerHTML += `<li><a href="#data-"><span>${author.replace('by ', '')}(${allAuthors[author]})</span></a></li>`;
+    //'<li>'+ author.replace('by ', '') + ' (' + allAuthors[author]+')</li>'
   }
 }
 
