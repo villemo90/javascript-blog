@@ -1,5 +1,12 @@
 'use strict';
 
+/* 6.4 Handelbars.js templates */
+
+const templates = {
+  articleLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML),
+  tagLink: Handelbars.compile(document.querySelector('#template-tag-link').innerHTML),
+}
+
 function titleClickHandler(event){
   event.preventDefault();
   const clickedElement = this;
@@ -66,7 +73,9 @@ function generateTitleLinks(customSelector = '') {
     /* find the title element */
     const articleTitle = article.querySelector(optTitleSelector).innerHTML;
     /* get the title from the title element */
-    const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
+    //const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
+    const linkHTMLData = {id: articleId, title: articleTitle};
+    const linkHTML = templates.articleLink(linkHTMLData);
     /* insert link into titleList */
     titleList.innerHTML = titleList.innerHTML + linkHTML;
   }
@@ -132,7 +141,9 @@ function generateTags(){
     /* START LOOP: for each tag */
     for(let tag of articleTagsArray){
         /* generate HTML of the link */
-      const linkHTML = '<li><a href="#tag-' + tag + '"><span>' + tag + '</span></a></li>';
+      //const linkHTML = '<li><a href="#tag-' + tag + '"><span>' + tag + '</span></a></li>';
+      const linkHTMLData = {id: tag, title: tag};
+      const linkHTML = templates.tagLink(linkHTMLData);
         /* add generated code to html variable */
       html = html + linkHTML;
           /* [NEW] check if this link is NOT already in allTags */
@@ -233,7 +244,6 @@ function generateAuthors(){
   const authors = document.querySelectorAll(optAuthorsSelector)[0];
   for (let author in allAuthors){
     authors.innerHTML += `<li><a href="#data-"><span>${author.replace('by ', '')}(${allAuthors[author]})</span></a></li>`;
-    //'<li>'+ author.replace('by ', '') + ' (' + allAuthors[author]+')</li>'
   }
 }
 
