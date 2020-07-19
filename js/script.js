@@ -4,7 +4,7 @@
 
 const templates = {
   articleLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML),
-  tagLink: Handelbars.compile(document.querySelector('#template-tag-link').innerHTML),
+  tagLink: Handlebars.compile(document.querySelector('#template-tag-link').innerHTML),
 }
 
 function titleClickHandler(event){
