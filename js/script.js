@@ -5,6 +5,7 @@
 const templates = {
   articleLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML),
   tagLink: Handlebars.compile(document.querySelector('#template-tag-link').innerHTML),
+  authorLink: Handlebars.compile(document.querySelector('#template-author-link').innerHTML),
 }
 
 function titleClickHandler(event){
@@ -223,6 +224,23 @@ addClickListenersToTags();
 
 
 // AUTHORS //
+
+// Article Author //
+function generateArticleAuthors() {
+  const articles = document.querySelectorAll(optArticleSelector);
+
+  for (let article of articles) {
+    const authorName = article.getAttribute('data-author');
+    const authorLink = `<a href="#data-"><span>${ authorName }</span></a>`;
+    const authorContainer = document.querySelector(optArticleAuthorSelector);
+
+            //classList.add('active');
+    console.log(authorContainer);
+    authorContainer.innerHTML = authorLink;
+  }
+}
+generateArticleAuthors();
+
 
 function generateAuthors(){
   const allAuthors = {};
